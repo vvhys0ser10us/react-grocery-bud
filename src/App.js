@@ -16,7 +16,7 @@ function App() {
 
   const removeItem = (deleteId) => {
     setList(list.filter((item) => deleteId != item.id))
-    showAlert(true, 'item deleted', 'success')
+    showAlert(true, 'item deleted', 'danger')
   }
 
   const handleSubmit = (e) => {
@@ -37,6 +37,11 @@ function App() {
 
   const showAlert = (show = false, msg = '', type = '') => {
     setAlert({ show, type, msg })
+  }
+
+  const clearList = () => {
+    showAlert(true, 'empty list', 'danger')
+    setList([])
   }
 
   useEffect(() => {
@@ -72,7 +77,9 @@ function App() {
       {list.length > 0 && (
         <div className="grocery-container">
           <List items={list} removeItem={removeItem}></List>
-          <button className="clear-btn">clear items</button>
+          <button className="clear-btn" onClick={clearList}>
+            clear items
+          </button>
         </div>
       )}
     </section>
